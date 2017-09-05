@@ -1,0 +1,28 @@
+{
+  "name": "aria-extensions",
+  "version": "1.0.0",
+  "description": "Extensions to the element prototype chain to calculate aria properties",
+  "main": "lib/index.js",
+  "author": "Daniel Lewis",
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^14.4.0",
+    "eslint": "^4.6.1",
+    "eslint-config-airbnb-base": "^11.3.2",
+    "eslint-plugin-import": "^2.7.0",
+    "expect": "^1.20.2",
+    "http-server": "^0.10.0",
+    "mocha": "^3.5.0",
+    "watch": "^1.0.2"
+  },
+  "scripts": {
+    "mkbuild": "mkdir -p build",
+    "clean": "rm -f build/*",
+    "lint": "eslint . --ext .js",
+    "prebuild": "npm run mkbuild && npm run clean && npm run lint",
+    "build": "npm run build:dev",
+    "build:dev": "browserify -d -s AriaExtensions lib/index.js > build/index.js",
+    "watch": "npm run start & watch 'npm run build:dev' lib",
+    "start": "http-server -c-1"
+  }
+}
