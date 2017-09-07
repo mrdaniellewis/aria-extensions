@@ -84,4 +84,9 @@
       },
     };
   };
+
+  // -------------------------------------
+  // Find a symbol on an object
+  // -------------------------------------
+  window.findSymbol = (ob, name) => Object.getOwnPropertySymbols(ob).find(s => s.toString() === `Symbol(${name})`);
 }());

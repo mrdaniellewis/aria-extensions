@@ -1,14 +1,14 @@
 describe('map extensions', () => {
   it('makes a symbol available on extensions.symbols.images', () => {
-    expect(typeof extensions.symbols.images).toEqual('symbol');
+    expect(symbols.images.toString()).toEqual('Symbol(aria-extensions-images)');
   });
 
-  describe('#images', () => {
+  describe('#[images]', () => {
     it('returns an empty array if no images are using an imagemap', () => {
       appendToBody('<img src="flower.jpg" />');
       const node = appendToBody('<map />');
 
-      expect(node[extensions.symbols.images]).toEqual([]);
+      expect(node[symbols.images]).toEqual([]);
     });
 
     it('returns images using a map', () => {
@@ -16,34 +16,26 @@ describe('map extensions', () => {
       const image2 = appendToBody('<img usemap="#map" src="flower.jpg" />');
       const node = appendToBody('<map name="map"/>');
 
-      expect(node[extensions.symbols.images]).toEqual([image1, image2]);
+      expect(node[symbols.images]).toEqual([image1, image2]);
     });
 
     it('returns images case insensitively', () => {
       const image = appendToBody('<img usemap="#MaP" src="flower.jpg" />');
       const node = appendToBody('<map name="map"/>');
 
-      expect(node[extensions.symbols.images]).toEqual([image]);
+      expect(node[symbols.images]).toEqual([image]);
     });
 
     describe('caching', () => {
       it('caches the value', () => {
-        extensions.startCaching();
+        ariaExtensions.startCaching();
 
         const image = appendToBody('<img usemap="#map" src="flower.jpg" />');
         const node = appendToBody('<map name="map"/>');
 
-        expect(node[extensions.symbols.images]).toEqual([image]);
+        expect(node[symbols.images]).toEqual([image]);
         image.useMap = '';
-        expect(node[extensions.symbols.images]).toEqual([image]);
-      });
-    });
-
-    describe('removing extensions', () => {
-      it('removes the images extension', () => {
-        const node = appendToBody('<map name="map"/>');
-        extensions.destroy();
-        expect(node[extensions.symbols.images]).toEqual(undefined);
+        expect(node[symbols.images]).toEqual([image]);
       });
     });
   });

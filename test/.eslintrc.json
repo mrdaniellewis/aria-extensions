@@ -3,8 +3,6 @@
     "mocha": true
   },
   "globals": {
-    "AriaExtensions": false,
-    "extensions": true,
     "afterAll": false,
     "afterTimeout": false,
     "appendToBody": false,
@@ -22,7 +20,10 @@
     "testData": true,
     "TestLogger": false,
     "uniqueId": false,
-    "whenDomUpdates": false
+    "whenDomUpdates": false,
+    "findSymbol": false,
+    "ariaExtensions": false,
+    "symbols": false
   },
   "rules": {
     "prefer-arrow-callback": 0,

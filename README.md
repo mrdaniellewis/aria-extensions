@@ -6,10 +6,9 @@ This extends the prototype chain using symbols.  Therefore clashes, even between
 
 ## Todo
 
-* Restore original caching mechanism
-* ImageMap extensions
-* Visible extensions
 * Contrast extensions
+  * Add in opacity
+* Use automated caching mechanisum
 * Role extensions
 
 ## Example

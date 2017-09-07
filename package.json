@@ -21,7 +21,7 @@
     "lint": "eslint . --ext .js",
     "prebuild": "npm run mkbuild && npm run clean && npm run lint",
     "build": "npm run build:dev",
-    "build:dev": "browserify -d -s AriaExtensions lib/index.js > build/index.js",
+    "build:dev": "browserify -d -s ariaExtensions lib/index.js > build/index.js",
     "watch": "npm run start & watch 'npm run build:dev' lib",
     "start": "http-server -c-1"
   }

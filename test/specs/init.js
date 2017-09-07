@@ -1,12 +1,8 @@
-let extensions;
+// Helpful shortcut
+window.symbols = ariaExtensions.symbols;
 
+// Remove any created DOM nodes
 clean();
 
-beforeEach(() => {
-  extensions = new AriaExtensions();
-});
-
-afterEach(() => {
-  extensions.destroy();
-  extensions = null;
-});
+// Stop caching if caching has been started
+afterEach(() => ariaExtensions.stopCaching());
