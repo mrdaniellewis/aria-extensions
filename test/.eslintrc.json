@@ -23,7 +23,8 @@
     "whenDomUpdates": false,
     "findSymbol": false,
     "ariaExtensions": false,
-    "symbols": false
+    "symbols": false,
+    "ExtendedArray": false
   },
   "rules": {
     "prefer-arrow-callback": 0,

@@ -1,0 +1,148 @@
+{
+  "article": [
+    "article"
+  ],
+  "banner": [
+    "header"
+  ],
+  "button": [
+    "button",
+    "input",
+    "summary"
+  ],
+  "cell": [
+    "td"
+  ],
+  "checkbox": [
+    "input"
+  ],
+  "columnheader": [
+    "th"
+  ],
+  "combobox": [
+    "input"
+  ],
+  "complementary": [
+    "aside"
+  ],
+  "contentinfo": [
+    "footer"
+  ],
+  "definition": [
+    "dd"
+  ],
+  "dialog": [
+    "dialog"
+  ],
+  "document": [
+    "body"
+  ],
+  "figure": [
+    "figure"
+  ],
+  "form": [
+    "form"
+  ],
+  "gridcell": [
+    "td"
+  ],
+  "group": [
+    "details",
+    "optgroup"
+  ],
+  "heading": [
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6"
+  ],
+  "img": [
+    "img"
+  ],
+  "link": [
+    "a",
+    "area",
+    "link"
+  ],
+  "list": [
+    "dl",
+    "ol",
+    "ul"
+  ],
+  "listbox": [
+    "datalist",
+    "select"
+  ],
+  "listitem": [
+    "dt",
+    "li"
+  ],
+  "main": [
+    "main"
+  ],
+  "math": [
+    "math"
+  ],
+  "menu": [
+    "menu"
+  ],
+  "menuitem": [
+    "menuitem"
+  ],
+  "menuitemcheckbox": [
+    "menuitem"
+  ],
+  "menuitemradio": [
+    "menuitem"
+  ],
+  "navigation": [
+    "nav"
+  ],
+  "option": [
+    "option"
+  ],
+  "progressbar": [
+    "progress"
+  ],
+  "radio": [
+    "input"
+  ],
+  "region": [
+    "section"
+  ],
+  "row": [
+    "tr"
+  ],
+  "rowgroup": [
+    "tbody",
+    "thead",
+    "tfoot"
+  ],
+  "rowheader": [
+    "th"
+  ],
+  "searchbox": [
+    "input"
+  ],
+  "separator": [
+    "hr"
+  ],
+  "slider": [
+    "input"
+  ],
+  "spinbutton": [
+    "input"
+  ],
+  "status": [
+    "output"
+  ],
+  "table": [
+    "table"
+  ],
+  "textbox": [
+    "input",
+    "textarea"
+  ]
+}

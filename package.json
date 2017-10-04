@@ -5,6 +5,9 @@
   "main": "lib/index.js",
   "author": "Daniel Lewis",
   "license": "ISC",
+  "dependencies": {
+    "aria-config": "mrdaniellewis/aria-config.git#v1.1.0"
+  },
   "devDependencies": {
     "browserify": "^14.4.0",
     "eslint": "^4.6.1",

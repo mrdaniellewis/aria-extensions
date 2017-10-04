@@ -6,34 +6,24 @@ This extends the prototype chain using symbols.  Therefore clashes, even between
 
 ## Todo
 
-* Contrast extensions
-  * Add in opacity
-* Use automated caching mechanisum
 * Role extensions
+  * implicit attribute rules
+* Fix cacheable keys
+* accessibleName/description
+* finish section
+* Move helpers into sub repository
+  * expect must be in it
+  * it must have expect
+* cleanup test helpers
+* documentation
+* build system
 
-## Example
+## Extensions
 
-```
-// extend the prototype chain
-const extensions = new AriaExtensions();
 
-// Run one of the methods
-document.body[extensions.symbols.role] // "document"
+## `ariaExtensions` object
 
-```
 
-## Constructor
-
-```js
-const ariaExtensions = new AriaExtensions(options);
-```
-
-Extend the prototype chain.  This extends the prototype chain with a new set of symbols.  The property `symbols` on the instance will contain the newly generated symbols.
-
-### Options
-
-* `options.roles` - A list of all aria roles, and the configuration for those roles.
-* `options.attributes` - A list of all aria attributes and the configuration for those attributes.
 
 ## Properties
 
@@ -47,7 +37,6 @@ Extend the prototype chain.  This extends the prototype chain with a new set of 
 * `startCaching()` - Start caching all returned values.  All computed values on each element will be calculated once and cached.
 * `endCaching()` - End caching.  Caching will no longer take place and all cached values will be discarded.
 
-## Extensions
 
 The symbol used can be found on the `symbols` property of the `AriaExtensions` instance.
 

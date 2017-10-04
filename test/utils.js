@@ -89,4 +89,13 @@
   // Find a symbol on an object
   // -------------------------------------
   window.findSymbol = (ob, name) => Object.getOwnPropertySymbols(ob).find(s => s.toString() === `Symbol(${name})`);
+
+  // -------------------------------------
+  // Improved array manipulation
+  // -------------------------------------
+  window.ExtendedArray = class ExtendedArray extends Array {
+    not(...values) {
+      return this.filter(value => !values.includes(value));
+    }
+  };
 }());

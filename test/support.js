@@ -38,6 +38,22 @@
       expect(this.actual.calls.map(call => call.arguments)).toEqual(Array.from(arguments));
       return this;
     },
+
+    toIncludeProperties(ob) {
+      Object.entries(ob).forEach(([name, entry]) => {
+        try {
+          if (Array.isArray(ob[name])) {
+            expect(entry).toMatchArray(this.actual[name]);
+          } else {
+            expect(entry).toEqual(this.actual[name]);
+          }
+        } catch (e) {
+          e.message += ` on ${name}`;
+          throw e;
+        }
+      });
+      return this;
+    },
   });
 
   // -------------------------------------
