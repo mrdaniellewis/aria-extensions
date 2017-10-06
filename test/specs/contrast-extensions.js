@@ -1,8 +1,4 @@
 describe('contrast-extensions', () => {
-  it('makes a symbol available on symbols.contrast', () => {
-    expect(symbols.contrast.toString()).toEqual('Symbol(aria-extensions-contrast)');
-  });
-
   describe('.[luminosity]', () => {
     const luminosity = findSymbol(ariaExtensions, 'aria-extensions-luminosity');
 

@@ -1,8 +1,4 @@
 describe('focusable extensions', () => {
-  it('makes a symbol available on extensions.symbols.focusable', () => {
-    expect(symbols.focusable.toString()).toEqual('Symbol(aria-extensions-focusable)');
-  });
-
   describe('#[focusable]', () => {
     it('returns false for a non-focusable element', () => {
       const node = appendToBody('<div />');

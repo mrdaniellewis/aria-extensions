@@ -54,10 +54,6 @@
     "implicit": "definition",
     "allowedRoles": []
   },
-  "details": {
-    "implicit": "group",
-    "allowedRoles": []
-  },
   "dialog": {
     "implicit": "dialog",
     "allowedRoles": [
@@ -81,13 +77,6 @@
       "application",
       "document",
       "img",
-      "none",
-      "presentation"
-    ]
-  },
-  "fieldset": {
-    "allowedRoles": [
-      "group",
       "none",
       "presentation"
     ]
@@ -244,9 +233,6 @@
     "allowedRoles": [],
     "attributes": false
   },
-  "meter": {
-    "allowedRoles": []
-  },
   "nav": {
     "implicit": "navigation",
     "allowedRoles": []
@@ -286,9 +272,6 @@
     "implicit": "option",
     "allowedRoles": []
   },
-  "output": {
-    "implicit": "status"
-  },
   "param": {
     "allowedRoles": [],
     "attributes": false
@@ -304,17 +287,6 @@
   "script": {
     "allowedRoles": [],
     "attributes": false
-  },
-  "select": {
-    "implicit": "listbox",
-    "allowedRoles": [
-      "menu"
-    ],
-    "implicitAttributes": [
-      "disabled",
-      "required"
-    ],
-    "disallowNone": true
   },
   "source": {
     "allowedRoles": [],
@@ -335,23 +307,9 @@
     "implicit": "button",
     "allowedRoles": ["button"]
   },
-  "table": {
-    "implicit": "table"
-  },
   "template": {
     "allowedRoles": [],
     "attributes": false
-  },
-  "textarea": {
-    "implicit": "textbox",
-    "allowedRoles": [],
-    "implicitAttributes": [
-      "disabled",
-      "placeholder",
-      "required",
-      "readonly"
-    ],
-    "disallowNone": true,
   },
   "tbody": {
     "implicit": "rowgroup"

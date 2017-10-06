@@ -1,8 +1,4 @@
 describe('visible-extensions', () => {
-  it('makes a symbol available on symbols.visible', () => {
-    expect(symbols.visible.toString()).toEqual('Symbol(aria-extensions-visible)');
-  });
-
   describe('#[visible]', () => {
     it('is true for a visible element', () => {
       const node = appendToBody('<div />');
@@ -137,6 +133,33 @@ describe('visible-extensions', () => {
         image.useMap = '';
         expect(node[symbols.visible]).toEqual(true);
       });
+    });
+  });
+
+  describe('#[ariaVisible]', () => {
+    it('is true for a visible element', () => {
+      const node = appendToBody('<div>foo</div>');
+      expect(node[symbols.ariaVisible]).toEqual(true);
+    });
+
+    it('is false for an invisible element', () => {
+      const node = appendToBody('<div hidden>foo</div>');
+      expect(node[symbols.ariaVisible]).toEqual(false);
+    });
+
+    it('is false for a visible element with aria-hidden="true"', () => {
+      const node = appendToBody('<div aria-hidden="true">foo</div>');
+      expect(node[symbols.ariaVisible]).toEqual(false);
+    });
+
+    it('is false for a visible element with an ancestor aria-hidden="true"', () => {
+      const node = appendToBody('<div aria-hidden="true"><span>foo</span></div>').querySelector('span');
+      expect(node[symbols.ariaVisible]).toEqual(false);
+    });
+
+    it('is true for an aria-hidden element that is focusable', () => {
+      const node = appendToBody('<button aria-hidden="true">foo</button>');
+      expect(node[symbols.ariaVisible]).toEqual(true);
     });
   });
 });

@@ -1,8 +1,4 @@
 describe('map extensions', () => {
-  it('makes a symbol available on extensions.symbols.images', () => {
-    expect(symbols.images.toString()).toEqual('Symbol(aria-extensions-images)');
-  });
-
   describe('#[images]', () => {
     it('returns an empty array if no images are using an imagemap', () => {
       appendToBody('<img src="flower.jpg" />');

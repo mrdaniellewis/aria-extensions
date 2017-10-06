@@ -278,6 +278,11 @@ describe('role-extensions', () => {
           const el = appendToBody('<input list="list-id" /><datalist id="list-id" />');
           expect(el[symbols.findRole]('combobox')).toEqual([el]);
         });
+
+        it('finds <select>', () => {
+          const el = appendToBody('<select></select>');
+          expect(el[symbols.findRole]('combobox')).toEqual([el]);
+        });
       });
 
       context('implicit complementary', () => {
@@ -397,7 +402,7 @@ describe('role-extensions', () => {
         });
 
         it('finds <select>', () => {
-          const el = appendToBody('<select />');
+          const el = appendToBody('<select multiple />');
           expect(el[symbols.findRole]('listbox')).toEqual([el]);
         });
       });

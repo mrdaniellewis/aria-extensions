@@ -6,11 +6,10 @@ This extends the prototype chain using symbols.  Therefore clashes, even between
 
 ## Todo
 
-* Role extensions
-  * implicit attribute rules
-* Fix cacheable keys
-* accessibleName/description
 * finish section
+* multiple select
+* Fix cacheable keys
+* Move to jest
 * Move helpers into sub repository
   * expect must be in it
   * it must have expect

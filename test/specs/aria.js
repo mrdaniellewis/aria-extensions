@@ -1487,28 +1487,83 @@ describe('ariaExtenions#[aria]', () => {
   });
 
   context('<section>', () => {
-    // hasSpec.push('section');
+    hasSpec.push('section');
 
     context('has an accessible name', () => {
-      it('returns the correct data');
+      it('returns the correct data', () => {
+        const el = appendToBody('<section title="foo" />');
+        expect(el[symbols.aria]).toIncludeProperties({
+          role: 'region',
+          implicit: 'region',
+          allowedRoles: ['alert', 'alertdialog', 'application', 'banner', 'complementary', 'contentinfo', 'dialog', 'document', 'feed', 'log', 'main', 'marquee', 'navigation', 'none', 'presentation', 'search', 'status', 'tabpanel'],
+          allowedAttributes: globalAttributes.concat('expanded'),
+          implicitAttributes: [],
+        });
+      });
     });
 
     context('does not have an accessible name', () => {
-      it('returns the correct data');
+      it('returns the correct data', () => {
+        const el = appendToBody('<section />');
+        expect(el[symbols.aria]).toIncludeProperties({
+          role: null,
+          implicit: null,
+          allowedRoles: ['alert', 'alertdialog', 'application', 'banner', 'complementary', 'contentinfo', 'dialog', 'document', 'feed', 'log', 'main', 'marquee', 'navigation', 'none', 'presentation', 'search', 'status', 'tabpanel'],
+          allowedAttributes: globalAttributes,
+          implicitAttributes: [],
+        });
+      });
     });
   });
 
   context('<select>', () => {
     hasSpec.push('select');
 
-    it('returns the correct data', () => {
-      const el = appendToBody('<select />');
-      expect(el[symbols.aria]).toIncludeProperties({
-        role: 'listbox',
-        implicit: 'listbox',
-        allowedRoles: ['menu'],
-        allowedAttributes: globalAttributes.concat('activedescendant', 'expanded', 'orientation', 'multiselectable', 'readonly').not('disabled'),
-        implicitAttributes: ['disabled', 'required'],
+    context('as a combobox', () => {
+      it('returns the correct data', () => {
+        const el = appendToBody('<select />');
+        expect(el[symbols.aria]).toIncludeProperties({
+          role: 'combobox',
+          implicit: 'combobox',
+          allowedRoles: ['menu'],
+          allowedAttributes: globalAttributes.concat('autocomplete', 'activedescendant', 'expanded', 'orientation', 'readonly').not('disabled'),
+          implicitAttributes: ['disabled', 'required'],
+        });
+      });
+
+      it('returns the correct data with a size of 1', () => {
+        const el = appendToBody('<select size="1" />');
+        expect(el[symbols.aria]).toIncludeProperties({
+          role: 'combobox',
+          implicit: 'combobox',
+          allowedRoles: ['menu'],
+          allowedAttributes: globalAttributes.concat('autocomplete', 'activedescendant', 'expanded', 'orientation', 'readonly').not('disabled'),
+          implicitAttributes: ['disabled', 'required'],
+        });
+      });
+    });
+
+    context('as a listbox', () => {
+      it('returns the correct data with the multiple attribute', () => {
+        const el = appendToBody('<select multiple />');
+        expect(el[symbols.aria]).toIncludeProperties({
+          role: 'listbox',
+          implicit: 'listbox',
+          allowedRoles: [],
+          allowedAttributes: globalAttributes.concat('activedescendant', 'expanded', 'orientation', 'multiselectable', 'readonly').not('disabled'),
+          implicitAttributes: ['disabled', 'required'],
+        });
+      });
+
+      it('returns the correct data with the size attribute', () => {
+        const el = appendToBody('<select size="2" />');
+        expect(el[symbols.aria]).toIncludeProperties({
+          role: 'listbox',
+          implicit: 'listbox',
+          allowedRoles: [],
+          allowedAttributes: globalAttributes.concat('activedescendant', 'expanded', 'orientation', 'multiselectable', 'readonly').not('disabled'),
+          implicitAttributes: ['disabled', 'required'],
+        });
       });
     });
 
@@ -1516,7 +1571,7 @@ describe('ariaExtenions#[aria]', () => {
       ['none', 'presentation'].forEach((role) => {
         it(`disallows ${role}`, () => {
           const el = appendToBody(`<select role="${role}"/>`);
-          expect(el[symbols.role]).toEqual('listbox');
+          expect(el[symbols.role]).toEqual('combobox');
         });
       });
     });

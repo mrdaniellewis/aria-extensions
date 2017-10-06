@@ -1,8 +1,4 @@
 describe('style extensions', () => {
-  it('makes a symbol available on extensions.symbols.style', () => {
-    expect(symbols.style.toString()).toEqual('Symbol(aria-extensions-style)');
-  });
-
   describe('#[style]', () => {
     it('returns a style value', () => {
       const node = appendToBody('<div style="color: #f00;">x</div>');
