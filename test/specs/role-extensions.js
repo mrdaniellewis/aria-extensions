@@ -186,6 +186,15 @@ describe('role-extensions', () => {
         el.removeAttribute('href');
         expect(el[symbols.closestRole]('link')).toEqual(el);
       });
+
+      it('caches the value using exact', () => {
+        ariaExtensions.startCaching();
+        const el = appendToBody('<a href="#" />');
+        expect(el[symbols.closestRole]('command', { exact: false })).toEqual(el);
+        el.removeAttribute('href');
+        expect(el[symbols.closestRole]('command', { exact: true })).toEqual(null);
+        expect(el[symbols.closestRole]('command', { exact: false })).toEqual(el);
+      });
     });
   });
 
@@ -582,6 +591,15 @@ describe('role-extensions', () => {
         expect(el[symbols.findRole]('link')).toEqual([el]);
         el.removeAttribute('href');
         expect(el[symbols.findRole]('link')).toEqual([el]);
+      });
+
+      it('caches the value using exact', () => {
+        ariaExtensions.startCaching();
+        const el = appendToBody('<a href="#" />');
+        expect(el[symbols.findRole]('command', { exact: false })).toEqual([el]);
+        el.removeAttribute('href');
+        expect(el[symbols.findRole]('command', { exact: true })).toEqual([]);
+        expect(el[symbols.findRole]('command', { exact: false })).toEqual([el]);
       });
     });
   });

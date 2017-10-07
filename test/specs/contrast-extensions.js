@@ -221,6 +221,16 @@ describe('contrast-extensions', () => {
       const el = appendToBody('<div style="color: rgba(255, 0, 0, .6);"><div style="color: #000" /></div>');
       expect(el[symbols.contrast].toFixed(2)).toEqual('2.86');
     });
+
+    context('caching', () => {
+      it('caches', () => {
+        ariaExtensions.startCaching();
+        const el = appendToBody('<div style="color: #f00; background-color: #f00;"></div>');
+        expect(el[symbols.contrast]).toEqual(1);
+        el.style.color = '#000';
+        expect(el[symbols.contrast]).toEqual(1);
+      });
+    });
   });
 
   describe('.contrast', () => {

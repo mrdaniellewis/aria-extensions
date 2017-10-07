@@ -196,5 +196,15 @@ describe('focusable extensions', () => {
         expect(node[symbols.focusable]).toEqual(true);
       });
     });
+
+    context('caching', () => {
+      it('caches', () => {
+        ariaExtensions.startCaching();
+        const node = appendToBody('<div tabindex="-1" />');
+        expect(node[symbols.focusable]).toEqual(true);
+        node.removeAttribute('tabindex');
+        expect(node[symbols.focusable]).toEqual(true);
+      });
+    });
   });
 });

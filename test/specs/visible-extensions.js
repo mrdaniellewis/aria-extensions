@@ -161,5 +161,15 @@ describe('visible-extensions', () => {
       const node = appendToBody('<button aria-hidden="true">foo</button>');
       expect(node[symbols.ariaVisible]).toEqual(true);
     });
+
+    describe('caching', () => {
+      it('caches the value', () => {
+        ariaExtensions.startCaching();
+        const node = appendToBody('<div />');
+        expect(node[symbols.ariaVisible]).toEqual(true);
+        node.style.display = 'none';
+        expect(node[symbols.ariaVisible]).toEqual(true);
+      });
+    });
   });
 });

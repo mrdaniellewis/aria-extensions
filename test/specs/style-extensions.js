@@ -15,22 +15,18 @@ describe('style extensions', () => {
       it('can cache the value', () => {
         ariaExtensions.startCaching();
         const node = appendToBody('<div style="color: #f00;">x</div>');
-        node[symbols.style]('color');
-        const spy = expect.spyOn(window, 'getComputedStyle').andCallThrough();
-
         expect(node[symbols.style]('color')).toEqual('rgb(255, 0, 0)');
-        expect(spy).toNotHaveBeenCalled();
+        node.style.color = '#000';
+        expect(node[symbols.style]('color')).toEqual('rgb(255, 0, 0)');
       });
 
       it('can cache a pseudo value', () => {
         ariaExtensions.startCaching();
-        appendToBody('<style>.pseudo-test::before { color: #00f; content: "x"; }</style>');
+        const style = appendToBody('<style>.pseudo-test::before { color: #00f; content: "x"; }</style>');
         const node = appendToBody('<div class="pseudo-test">x</div>');
-        node[symbols.style]('color', 'before');
-        const spy = expect.spyOn(window, 'getComputedStyle').andCallThrough();
-
         expect(node[symbols.style]('color', 'before')).toEqual('rgb(0, 0, 255)');
-        expect(spy).toNotHaveBeenCalled();
+        style.remove();
+        expect(node[symbols.style]('color', 'before')).toEqual('rgb(0, 0, 255)');
       });
     });
   });

@@ -7,12 +7,9 @@
 <body>
   <div id="mocha"></div>
   <script src="../node_modules/mocha/mocha.js"></script>
-  <script src="../node_modules/expect/umd/expect.min.js"></script>
-  <script>mocha.setup('bdd');</script>
+  <script src="../node_modules/mocha-browser-helpers/build/index.js"></script>
   <script src="../build/index.js"></script>
-  <script src="support.js"></script>
-  <script src="utils.js"></script>
-  <script src="specs/init.js"></script>
+  <script src="setup.js"></script>
   <script src="specs/aria-extensions.js"></script>
   <script src="specs/style-extensions.js"></script>
   <script src="specs/map-extensions.js"></script>
@@ -24,7 +21,6 @@
   <script src="specs/name-extensions.js"></script>
   <script>
     mocha.checkLeaks();
-    Promise.all(window.loadingTests)
-      .then(() => mocha.run());
+    mocha.run();
   </script>
 </body>

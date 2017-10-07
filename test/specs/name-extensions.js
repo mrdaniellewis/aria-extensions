@@ -442,6 +442,16 @@ describe('name-extensions', () => {
         expect(node[symbols.accessibleName]).toEqual('foo');
       });
     });
+
+    describe('caching', () => {
+      it('caches', () => {
+        ariaExtensions.startCaching();
+        const node = appendToBody('<img alt="foo" />');
+        expect(node[symbols.accessibleName]).toEqual('foo');
+        node.alt = 'bar';
+        expect(node[symbols.accessibleName]).toEqual('foo');
+      });
+    });
   });
 
   describe('#[accessibleDescription]', () => {
@@ -539,6 +549,17 @@ describe('name-extensions', () => {
           </div>
         </button>`);
         expect(node[symbols.accessibleDescription]).toEqual('foo fee foofox foo frog');
+      });
+    });
+
+    describe('caching', () => {
+      it('caches', () => {
+        ariaExtensions.startCaching();
+        const id = uniqueId();
+        const node = appendToBody(`<div aria-describedby="${id}" /><div id="${id}">foo</div>`);
+        expect(node[symbols.accessibleDescription]).toEqual('foo');
+        node.removeAttribute('aria-describedby');
+        expect(node[symbols.accessibleDescription]).toEqual('foo');
       });
     });
   });

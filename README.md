@@ -6,14 +6,6 @@ This extends the prototype chain using symbols.  Therefore clashes, even between
 
 ## Todo
 
-* finish section
-* multiple select
-* Fix cacheable keys
-* Move to jest
-* Move helpers into sub repository
-  * expect must be in it
-  * it must have expect
-* cleanup test helpers
 * documentation
 * build system
 

@@ -9,12 +9,12 @@ describe('ariaExtension', () => {
   }));
 
   it('is a property of window', () => {
-    expect(ariaExtensions).toExist();
+    expect(ariaExtensions).toBeTruthy();
   });
 
   describe('.symbols', () => {
     it('is an object', () => {
-      expect(ariaExtensions.symbols).toBeAn(Object);
+      expect(ariaExtensions.symbols).toBeInstanceOf(Object);
       expect(symbols).toBe(ariaExtensions.symbols);
     });
   });
@@ -140,11 +140,11 @@ describe('ariaExtension', () => {
       ariaExtensions.startCaching();
       const ob = {};
       let count = 0;
-      const spy = expect.createSpy().andReturn('key');
+      const spy = mock.fn(() => 'key');
       ariaExtensions[extend](ob, 'foo', { value() { return count++; } }, { keygen: spy });
       expect(ob[symbols.foo]('foo')).toEqual(0);
       expect(ob[symbols.foo]('bar')).toEqual(0);
-      expect(spy).toHaveHadCalls(['foo'], ['bar']);
+      expect(spy.mock.calls).toEqual([['foo'], ['bar']]);
     });
   });
 });
