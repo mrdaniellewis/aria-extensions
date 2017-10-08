@@ -4,17 +4,12 @@ Extensions to the element prototype chain allowing aria properties to be queried
 
 This extends the prototype chain using symbols.  Therefore clashes, even between different versions of the same library, are not possible.
 
-Supports the very latest browser versions only.
-
-# TODO
-
-- Add in test for roleCache
-- symbol generator
+Supports the very latest versions of major browsers only.
 
 ## Usage
 
 ```js
-const { symbols } = window.ariaExtensions;
+const { symbols } = ariaExtensions;
 
 // node = <input type="text" aria-label="foo" />
 node[symbols.role] // = "textbox"
@@ -34,7 +29,7 @@ This is the object exported from `lib/index.js`.
 - **`attributes`** settings for aria attributes. See [aria-config](https://github.com/mrdaniellewis/aria-config)
 
 `roles` and `attributes` can be modified before any lookups are made.
-If they are modified at a later point an internal cache found on `ariaExtensions[symbols.roleCache]` will need to be cleared.
+If they are modified at a later point an internal cache found on `ariaExtensions[symbols.cache]` will need to be cleared.
 
 ### Methods
 

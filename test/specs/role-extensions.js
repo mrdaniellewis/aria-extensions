@@ -603,4 +603,10 @@ describe('role-extensions', () => {
       });
     });
   });
+
+  describe('.[cache]', () => {
+    it('is a map', () => {
+      expect(ariaExtensions[symbols.cache]).toBeInstanceOf(Map);
+    });
+  });
 });
