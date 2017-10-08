@@ -2,9 +2,16 @@
   "name": "aria-extensions",
   "version": "1.0.0",
   "description": "Extensions to the element prototype chain to calculate aria properties",
-  "main": "lib/index.js",
+  "keywords": [
+    "aria"
+  ],
   "author": "Daniel Lewis",
   "license": "ISC",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "repository": "mrdaniellewis/aria-extensions",
   "dependencies": {
     "aria-config": "github:mrdaniellewis/aria-config#v1.1.0"
   },
