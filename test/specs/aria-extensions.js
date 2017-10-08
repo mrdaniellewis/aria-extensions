@@ -41,7 +41,7 @@ describe('ariaExtension', () => {
 
     it('reuses an existing symbol', () => {
       ariaExtensions[extend]({}, 'foo', { value() { return 'foo'; } });
-      const foo = symbols.foo;
+      const { foo } = symbols;
       ariaExtensions[extend]({}, 'foo', { value() { return 'foo'; } });
       expect(symbols.foo).toEqual(foo);
     });

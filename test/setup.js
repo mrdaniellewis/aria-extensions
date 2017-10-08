@@ -33,8 +33,6 @@ expect.extend({
         expect(entry).toEqual(actual[name]);
       }
     });
-    return {
-      pass: true,
-    };
+    return { pass: true };
   },
 });
