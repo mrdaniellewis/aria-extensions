@@ -184,6 +184,11 @@ describe('name-extensions', () => {
         });
 
         describe('<table>', () => {
+          it('returns an empty string with no caption', () => {
+            const node = appendToBody('<table></table>');
+            expect(node[symbols.accessibleName]).toEqual('');
+          });
+
           it('uses the caption', () => {
             const node = appendToBody('<table><caption>foo</caption></table>');
             expect(node[symbols.accessibleName]).toEqual('foo');
