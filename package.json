@@ -9,30 +9,25 @@
   "license": "ISC",
   "main": "lib/index.js",
   "files": [
+    "build",
     "lib"
   ],
   "repository": "mrdaniellewis/aria-extensions",
   "dependencies": {
-    "aria-config": "github:mrdaniellewis/aria-config#v1.1.0"
+    "aria-config": "mrdaniellewis/aria-config#v1.2.0"
   },
   "devDependencies": {
-    "browserify": "^14.4.0",
-    "eslint": "^4.8.0",
-    "eslint-config-airbnb-base": "^12.0.2",
-    "eslint-plugin-import": "^2.7.0",
-    "http-server": "^0.10.0",
-    "mocha": "^4.0.1",
-    "mocha-browser-helpers": "github:mrdaniellewis/mocha-browser-helpers",
-    "watch": "^1.0.2"
+    "eslint": "^4.18.2",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0",
+    "mocha": "^5.0.4",
+    "mocha-browser-helpers": "mrdaniellewis/mocha-browser-helpers#v1.4.0",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12",
+    "webpack-dev-server": "^3.1.1"
   },
   "scripts": {
-    "mkbuild": "mkdir -p build",
-    "clean": "rm -f build/*",
     "lint": "eslint . --ext .js",
-    "prebuild": "npm run mkbuild && npm run clean && npm run lint",
-    "build": "npm run build:dev",
-    "build:dev": "browserify -d -s ariaExtensions lib/index.js > build/index.js",
-    "watch": "npm run start & watch 'npm run build:dev' lib",
-    "start": "http-server -c-1"
+    "start": "webpack-dev-server"
   }
 }

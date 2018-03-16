@@ -1180,7 +1180,7 @@ describe('ariaExtenions#[aria]', () => {
           role: 'menuitem',
           implicit: 'menuitem',
           allowedRoles: [],
-          allowedAttributes: globalAttributes.concat('posinset', 'setsize'),
+          allowedAttributes: globalAttributes.concat('expanded', 'posinset', 'setsize'),
           implicitAttributes: [],
         });
       });
@@ -1192,7 +1192,7 @@ describe('ariaExtenions#[aria]', () => {
             role: 'menuitem',
             implicit: 'menuitem',
             allowedRoles: [],
-            allowedAttributes: globalAttributes.concat('posinset', 'setsize'),
+            allowedAttributes: globalAttributes.concat('expanded', 'posinset', 'setsize'),
             implicitAttributes: [],
           });
         });
@@ -1221,7 +1221,7 @@ describe('ariaExtenions#[aria]', () => {
           role: 'menuitem',
           implicit: 'menuitem',
           allowedRoles: [],
-          allowedAttributes: globalAttributes.concat('posinset', 'setsize'),
+          allowedAttributes: globalAttributes.concat('expanded', 'posinset', 'setsize'),
           implicitAttributes: [],
         });
       });
@@ -1233,7 +1233,7 @@ describe('ariaExtenions#[aria]', () => {
             role: 'menuitem',
             implicit: 'menuitem',
             allowedRoles: [],
-            allowedAttributes: globalAttributes.concat('posinset', 'setsize'),
+            allowedAttributes: globalAttributes.concat('expanded', 'posinset', 'setsize'),
             implicitAttributes: [],
           });
         });
@@ -1262,7 +1262,7 @@ describe('ariaExtenions#[aria]', () => {
           role: 'menuitemcheckbox',
           implicit: 'menuitemcheckbox',
           allowedRoles: [],
-          allowedAttributes: globalAttributes.concat('posinset', 'setsize', 'checked', 'readonly'),
+          allowedAttributes: globalAttributes.concat('expanded', 'posinset', 'setsize', 'checked', 'readonly'),
           implicitAttributes: [],
         });
       });
@@ -1274,7 +1274,7 @@ describe('ariaExtenions#[aria]', () => {
             role: 'menuitemcheckbox',
             implicit: 'menuitemcheckbox',
             allowedRoles: [],
-            allowedAttributes: globalAttributes.concat('posinset', 'setsize', 'checked', 'readonly'),
+            allowedAttributes: globalAttributes.concat('expanded', 'posinset', 'setsize', 'checked', 'readonly'),
             implicitAttributes: [],
           });
         });
@@ -1303,7 +1303,7 @@ describe('ariaExtenions#[aria]', () => {
           role: 'menuitemradio',
           implicit: 'menuitemradio',
           allowedRoles: [],
-          allowedAttributes: globalAttributes.concat('posinset', 'setsize', 'checked', 'readonly'),
+          allowedAttributes: globalAttributes.concat('expanded', 'posinset', 'setsize', 'checked', 'readonly'),
           implicitAttributes: [],
         });
       });
@@ -1315,7 +1315,7 @@ describe('ariaExtenions#[aria]', () => {
             role: 'menuitemradio',
             implicit: 'menuitemradio',
             allowedRoles: [],
-            allowedAttributes: globalAttributes.concat('posinset', 'setsize', 'checked', 'readonly'),
+            allowedAttributes: globalAttributes.concat('expanded', 'posinset', 'setsize', 'checked', 'readonly'),
             implicitAttributes: [],
           });
         });
@@ -1480,7 +1480,7 @@ describe('ariaExtenions#[aria]', () => {
         role: 'progressbar',
         implicit: 'progressbar',
         allowedRoles: [],
-        allowedAttributes: globalAttributes.concat('expanded', 'valuetext', 'valuemax', 'valuemin', 'valuenow'),
+        allowedAttributes: globalAttributes.concat('valuetext', 'valuemax', 'valuemin', 'valuenow'),
         implicitAttributes: [],
       });
     });
