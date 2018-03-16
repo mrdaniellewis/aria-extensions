@@ -477,10 +477,10 @@ describe('ariaExtenions#[aria]', () => {
     it('returns the correct data', () => {
       const el = appendToBody('<fieldset />');
       expect(el[symbols.aria]).toIncludeProperties({
-        role: null,
-        implicit: null,
-        allowedRoles: ['group', 'none', 'presentation'],
-        allowedAttributes: globalAttributes,
+        role: 'group',
+        implicit: 'group',
+        allowedRoles: ['none', 'presentation'],
+        allowedAttributes: globalAttributes.concat('activedescendant', 'expanded'),
         implicitAttributes: [],
       });
     });

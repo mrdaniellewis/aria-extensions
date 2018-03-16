@@ -148,7 +148,7 @@ describe('name-extensions', () => {
           });
         });
 
-        ['button', 'input', 'meter', 'output', 'progress', 'select', 'textarea'].forEach((name) => {
+        ['input', 'meter', 'output', 'progress', 'select', 'textarea'].forEach((name) => {
           describe(`<${name}>`, () => {
             it('uses labels as the text alternative', () => {
               const id = uniqueId();
@@ -164,7 +164,67 @@ describe('name-extensions', () => {
           });
         });
 
-        [['details', 'summary'], ['fieldset', 'legend']].forEach(([parent, child]) => {
+        describe('<button>', () => {
+          it('does not use labels', () => {
+            const node = appendToBody('<label>foo<button /></label').querySelector('button');
+            expect(node[symbols.accessibleName]).toEqual('');
+          });
+        });
+
+        describe('<input type="button">', () => {
+          it('uses value attribute as the text alternative', () => {
+            const node = appendToBody('<input type="button" value="foo" />');
+            expect(node[symbols.accessibleName]).toEqual('foo');
+          });
+
+          it('does not use labels', () => {
+            const node = appendToBody('<label>foo<input type="button" /></label>').querySelector('input');
+            expect(node[symbols.accessibleName]).toEqual('');
+          });
+        });
+
+        describe('<input type="submit">', () => {
+          it('uses value attribute as the text alternative', () => {
+            const node = appendToBody('<input type="submit" value="foo" />');
+            expect(node[symbols.accessibleName]).toEqual('foo');
+          });
+
+          it('falls back to "Submit"', () => {
+            const node = appendToBody('<label>foo<input type="submit" /></label>').querySelector('input');
+            expect(node[symbols.accessibleName]).toEqual('Submit');
+          });
+        });
+
+        describe('<input type="reset">', () => {
+          it('uses value attribute as the text alternative', () => {
+            const node = appendToBody('<input type="reset" value="foo" />');
+            expect(node[symbols.accessibleName]).toEqual('foo');
+          });
+
+          it('falls back to "Reset"', () => {
+            const node = appendToBody('<label>foo<input type="reset" /></label>').querySelector('input');
+            expect(node[symbols.accessibleName]).toEqual('Reset');
+          });
+        });
+
+        describe('<input type="image">', () => {
+          it('uses alt attribute as the text alternative', () => {
+            const node = appendToBody('<input type="image" alt="foo" />');
+            expect(node[symbols.accessibleName]).toEqual('foo');
+          });
+
+          it('uses value attribute as the text alternative', () => {
+            const node = appendToBody('<input type="image" value="foo" />');
+            expect(node[symbols.accessibleName]).toEqual('foo');
+          });
+
+          it('falls back to "Submit Query"', () => {
+            const node = appendToBody('<label>foo<input type="image" /></label>').querySelector('input');
+            expect(node[symbols.accessibleName]).toEqual('Submit Query');
+          });
+        });
+
+        [['details', 'summary'], ['fieldset', 'legend'], ['figure', 'figcaption']].forEach(([parent, child]) => {
           describe(`<${parent}>`, () => {
             it('uses the first child summary as the text alternative', () => {
               const node = appendToBody(`<${parent}><${child}>foo</${child}><${child}>bar</${child}></${parent}>`);
@@ -258,8 +318,7 @@ describe('name-extensions', () => {
       });
 
       it('returns native text alternative in preference to DOM contents for text-alternatives', () => {
-        const id = uniqueId();
-        const node = appendToBody(`<button id="${id}">bar</button><label for="${id}">foo</label>`);
+        const node = appendToBody('<input type="button" value="foo" />');
         expect(node[symbols.accessibleName]).toEqual('foo');
       });
 

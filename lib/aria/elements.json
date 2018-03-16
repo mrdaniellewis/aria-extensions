@@ -88,14 +88,6 @@
       "presentation"
     ]
   },
-  "figure": {
-    "implicit": "figure",
-    "allowedRoles": [
-      "group",
-      "none",
-      "presentation"
-    ]
-  },
   "form": {
     "implicit": "form",
     "allowedRoles": [

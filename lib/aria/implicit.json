@@ -49,6 +49,7 @@
   ],
   "group": [
     "details",
+    "fieldset",
     "optgroup"
   ],
   "heading": [
