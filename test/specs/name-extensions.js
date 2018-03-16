@@ -141,6 +141,13 @@ describe('name-extensions', () => {
           });
         });
 
+        describe('<br>', () => {
+          it('it inserts a space', () => {
+            const node = appendToBody('<button>foo<br />bar</button>');
+            expect(node[symbols.accessibleName]).toEqual('foo bar');
+          });
+        });
+
         describe('<img>', () => {
           it('uses alt as the text alternative', () => {
             const node = appendToBody('<img alt="foo" />');
@@ -286,6 +293,16 @@ describe('name-extensions', () => {
       it('uses the full algorithm on descendant nodes', () => {
         const node = appendToBody('<div role="button"><div><span aria-label="fee">foo</span></div>');
         expect(node[symbols.accessibleName]).toEqual('fee');
+      });
+
+      it('adds a space after any block element', () => {
+        const node = appendToBody(`<div role="button">
+          <div>foo</div>bar<div>fee</div>
+          <span>foo</span>bar<span>fee</span>
+          <div style="display: inline">foo</div>bar<div>fee</div>
+          <span style="display: table">foo</span>bar<span>fee</span>
+        </div>`);
+        expect(node[symbols.accessibleName]).toEqual('foo bar fee foobarfee foobar fee foo barfee');
       });
 
       it('does not create infinite loops', () => {

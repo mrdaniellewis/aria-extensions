@@ -330,7 +330,7 @@ describe('role-extensions', () => {
 
       context('implicit form', () => {
         it('finds <form>', () => {
-          const el = appendToBody('<form />');
+          const el = appendToBody('<form aria-label="foo" />');
           expect(el[symbols.findRole]('form')).toEqual([el]);
         });
       });
@@ -600,6 +600,13 @@ describe('role-extensions', () => {
         el.removeAttribute('href');
         expect(el[symbols.findRole]('command', { exact: true })).toEqual([]);
         expect(el[symbols.findRole]('command', { exact: false })).toEqual([el]);
+      });
+    });
+
+    context('on document', () => {
+      it('finds descendants with roles', () => {
+        const el = appendToBody('<div role="alert" />');
+        expect(document[symbols.findRole]('alert')).toEqual([el]);
       });
     });
   });

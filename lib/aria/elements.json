@@ -31,6 +31,9 @@
     "allowedRoles": [],
     "attributes": false
   },
+  "br": {
+    "nativeLabel": " "
+  },
   "body": {
     "implicit": "document",
     "allowedRoles": []

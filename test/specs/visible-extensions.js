@@ -157,6 +157,16 @@ describe('visible-extensions', () => {
       expect(node[symbols.ariaVisible]).toEqual(false);
     });
 
+    it('is false for a visible element with an ancestor aria-hidden="true" even if aria-hidden="false"', () => {
+      const node = appendToBody('<div aria-hidden="true"><span aria-hidden="false">foo</span></div>').querySelector('span');
+      expect(node[symbols.ariaVisible]).toEqual(false);
+    });
+
+    it('is true for an aria-hidden element that is focusable', () => {
+      const node = appendToBody('<button aria-hidden="true">foo</button>');
+      expect(node[symbols.ariaVisible]).toEqual(true);
+    });
+
     it('is true for an aria-hidden element that is focusable', () => {
       const node = appendToBody('<button aria-hidden="true">foo</button>');
       expect(node[symbols.ariaVisible]).toEqual(true);

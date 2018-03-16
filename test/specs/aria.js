@@ -539,6 +539,17 @@ describe('ariaExtenions#[aria]', () => {
     it('returns the correct data', () => {
       const el = appendToBody('<form />');
       expect(el[symbols.aria]).toIncludeProperties({
+        role: null,
+        implicit: null,
+        allowedRoles: ['none', 'presentation', 'search'],
+        allowedAttributes: globalAttributes,
+        implicitAttributes: [],
+      });
+    });
+
+    it('returns the correct data if the form has an accessible name', () => {
+      const el = appendToBody('<form aria-label="foo" />');
+      expect(el[symbols.aria]).toIncludeProperties({
         role: 'form',
         implicit: 'form',
         allowedRoles: ['none', 'presentation', 'search'],
