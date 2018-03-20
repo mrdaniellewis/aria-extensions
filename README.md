@@ -175,6 +175,7 @@ ariaExtensions.contrast('#000', '#aaa') // = 9.04
 ## `Element.prototype[symbols.findRole](names, { exact = false })`
 
 Find all descendant elements, including the element, with the specified calculated role(s).
+This method is also available on document.
 
 - **`names`** - *required* - string or array of strings - The roles to check against
 - **`exact`** - *optional* - boolean - if true only match against the exact role and not superclass roles.
@@ -193,6 +194,16 @@ Is the element focusable according to the HTML 5 specification.
 ```js
 // node = <div tabindex="-1" />
 node[symbols.focusable] // = true
+```
+
+## `Element.prototype[symbols.findFocusable]()`
+
+Find all descendant elements that are focusable including the current element.
+This method is also available on document.
+
+```js
+// node = <div tabindex="-1" />
+node[symbols.findFocusable] // = [node]
 ```
 
 ## `Element.prototype[symbols.hasRole](names, { exact = false })`

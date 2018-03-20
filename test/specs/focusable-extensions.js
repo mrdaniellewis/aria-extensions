@@ -207,4 +207,38 @@ describe('focusable extensions', () => {
       });
     });
   });
+
+  describe('#findFocusable', () => {
+    it('finds all focusable elements', () => {
+      const id = uniqueId();
+      const node = appendToBody(`<div>
+        <textarea></textarea>
+        <div tabindex="-1" />
+        <div draggable="true" />
+        <div contenteditable="true" />
+        <div draggable="false" />
+        <div contenteditable="false" />
+        <map name="${id}"><area /></map>
+        <img usemap="#${id}" />
+      <div>`);
+
+      expect(node[symbols.findFocusable]()).toEqual([
+        node.querySelector('textarea'),
+        node.querySelector('div[tabindex]'),
+        node.querySelector('div[draggable]'),
+        node.querySelector('div[contenteditable]'),
+        node.querySelector('area'),
+      ]);
+    });
+
+    it('finds itself if focusable', () => {
+      const node = appendToBody('<div tabindex="0" />');
+      expect(node[symbols.findFocusable]()).toEqual([node]);
+    });
+
+    it('can also be called on document', () => {
+      const node = appendToBody('<div tabindex="0" />');
+      expect(document[symbols.findFocusable]()).toContain(node);
+    });
+  });
 });
