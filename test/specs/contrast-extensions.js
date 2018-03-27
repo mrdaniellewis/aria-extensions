@@ -123,56 +123,52 @@ describe('contrast-extensions', () => {
     });
   });
 
-  describe('.[backgroundColour]', () => {
-    const backgroundColour = findSymbol(ariaExtensions, 'aria-extensions-backgroundColour');
-
+  describe('#[backgroundColour]', () => {
     it('returns the background colour', () => {
       const el = appendToBody('<div style="background-color: #f00" />');
-      expect(ariaExtensions[backgroundColour](el)).toEqual([255, 0, 0, 1]);
+      expect(el[symbols.backgroundColour]).toEqual([255, 0, 0, 1]);
     });
 
     it('blends alpha with a parent background', () => {
       const el = appendToBody('<div style="background-color: #123"><div style="background-color: rgba(51, 102, 153, .5);" /></div>');
-      expect(ariaExtensions[backgroundColour](el.firstChild)).toEqual([34, 68, 102, 1]);
+      expect(el.firstChild[symbols.backgroundColour]).toEqual([34, 68, 102, 1]);
     });
 
     it('blends with the document default colour', () => {
       const el = appendToBody('<div style="background-color: rgba(51, 102, 153, .5);" />');
-      expect(ariaExtensions[backgroundColour](el)).toEqual([153, 179, 204, 1]);
+      expect(el[symbols.backgroundColour]).toEqual([153, 179, 204, 1]);
     });
 
     it('blends opacity', () => {
       const el = appendToBody('<div style="background-color: #123; opacity: .5"><div style="background-color: rgba(51, 102, 153, .5); opacity: .5;" /></div>');
-      expect(ariaExtensions[backgroundColour](el.firstChild)).toEqual([140, 153, 166, 1]);
+      expect(el.firstChild[symbols.backgroundColour]).toEqual([140, 153, 166, 1]);
     });
   });
 
-  describe('.[textColour]', () => {
-    const textColour = findSymbol(ariaExtensions, 'aria-extensions-textColour');
-
+  describe('#[textColour]', () => {
     it('returns the text colour', () => {
       const el = appendToBody('<div style="color: #f00" />');
-      expect(ariaExtensions[textColour](el)).toEqual([255, 0, 0, 1]);
+      expect(el[symbols.textColour]).toEqual([255, 0, 0, 1]);
     });
 
     it('blends alpha with the background', () => {
       const el = appendToBody('<div style="color: rgba(51, 102, 153, .5); background-color: #123" />');
-      expect(ariaExtensions[textColour](el)).toEqual([34, 68, 102, 1]);
+      expect(el[symbols.textColour]).toEqual([34, 68, 102, 1]);
     });
 
     it('blends alpha with a parent background', () => {
       const el = appendToBody('<div style="background-color: #123"><div style="color: rgba(51, 102, 153, .5);" /></div>');
-      expect(ariaExtensions[textColour](el.firstChild)).toEqual([34, 68, 102, 1]);
+      expect(el.firstChild[symbols.textColour]).toEqual([34, 68, 102, 1]);
     });
 
     it('blends with the document default colour', () => {
       const el = appendToBody('<div style="color: rgba(51, 102, 153, .5);" />');
-      expect(ariaExtensions[textColour](el)).toEqual([153, 179, 204, 1]);
+      expect(el[symbols.textColour]).toEqual([153, 179, 204, 1]);
     });
 
     it('blends opacity', () => {
       const el = appendToBody('<div style="background-color: #123; opacity: .5;"><div style="color: rgba(51, 102, 153, .5); opacity: .5" /></div>');
-      expect(ariaExtensions[textColour](el.firstChild)).toEqual([140, 153, 166, 1]);
+      expect(el.firstChild[symbols.textColour]).toEqual([140, 153, 166, 1]);
     });
   });
 

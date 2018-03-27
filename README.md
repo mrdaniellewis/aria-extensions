@@ -172,6 +172,16 @@ Calculate the contract ratio between two colours.  The colours can be any CSS co
 ariaExtensions.contrast('#000', '#aaa') // = 9.04
 ```
 
+## `Element.prototype[symbols.backgroundColour]`
+
+Returns calculated background colour, including blending with background, of an element as an array of rgba values.
+As this is a blended colour the "a" value will always be 1.
+
+```js
+// node = <div style="color: #000; background-color: #aaa">foo</div>
+node[symbols.contrastRatio] // = [170, 170, 170, 1]
+```
+
 ## `Element.prototype[symbols.findRole](names, { exact = false })`
 
 Find all descendant elements, including the element, with the specified calculated role(s).
@@ -249,6 +259,16 @@ It also takes part in the caching mechanism (see `startCaching()`).
 ```js
 // node = <div hidden />
 node[symbols.style]('display') // = 'none'
+```
+
+## `Element.prototype[symbols.textColour]`
+
+Returns calculated text colour, including blending with background, of an element as an array of rgba values.
+As this is a blended colour the "a" value will always be 1.
+
+```js
+// node = <div style="color: rgba(20, 30, 40, 0.9); background-color: #aaa">foo</div>
+node[symbols.contrastRatio] // = [35, 44, 53, 1]
 ```
 
 ## `Element.prototype[symbols.visible]`
