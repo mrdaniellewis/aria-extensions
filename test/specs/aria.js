@@ -1,4 +1,4 @@
-describe('ariaExtenions#[aria]', () => {
+describe('ariaExtensions#[aria]', () => {
   const htmlElements = [
     'html', 'head', 'title', 'base', 'link', 'meta', 'style', 'body', 'article', 'section',
     'nav', 'aside', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'footer', 'p', 'address', 'hr',
@@ -137,42 +137,90 @@ describe('ariaExtenions#[aria]', () => {
   context('<area>', () => {
     hasSpec.push('area');
 
-    context('with a href', () => {
-      it('returns the correct data', () => {
-        const el = appendToBody('<area href="#" />');
-        expect(el[symbols.aria]).toIncludeProperties({
-          role: 'link',
-          implicit: 'link',
-          allowedRoles: [],
-          allowedAttributes: globalAttributes.concat('expanded'),
-          implicitAttributes: [],
+    context('attached to image map', () => {
+      context('with a href', () => {
+        it('returns the correct data', () => {
+          const id = uniqueId();
+          const el = appendToBody(`<map name="${id}"><area href="#" /></map><img usemap="#${id}" src="flower.jpg />`).querySelector('area');
+          expect(el[symbols.aria]).toIncludeProperties({
+            role: 'link',
+            implicit: 'link',
+            allowedRoles: [],
+            allowedAttributes: globalAttributes.concat('expanded'),
+            implicitAttributes: [],
+          });
+        });
+
+        ['none', 'presentation'].forEach((role) => {
+          it(`disallows ${role}`, () => {
+            const id = uniqueId();
+            const el = appendToBody(`<map name="${id}"><area href="#" /></map><img usemap="#${id}" src="flower.jpg />`).querySelector('area');
+            expect(el[symbols.role]).toEqual('link');
+          });
         });
       });
 
-      ['none', 'presentation'].forEach((role) => {
-        it(`disallows ${role}`, () => {
-          const el = appendToBody(`<area href="#" role="${role}"/>`);
-          expect(el[symbols.role]).toEqual('link');
+      context('without a href', () => {
+        it('returns the correct data', () => {
+          const id = uniqueId();
+          const el = appendToBody(`<map name="${id}"><area /></map><img usemap="#${id}" src="flower.jpg />`).querySelector('area');
+          expect(el[symbols.aria]).toIncludeProperties({
+            role: null,
+            implicit: null,
+            allowedRoles: [],
+            allowedAttributes: globalAttributes,
+            implicitAttributes: [],
+          });
+        });
+
+        ['none', 'presentation'].forEach((role) => {
+          it(`disallows ${role}`, () => {
+            const id = uniqueId();
+            const el = appendToBody(`<map name="${id}"><area /></map><img usemap="#${id}" src="flower.jpg />`).querySelector('area');
+            expect(el[symbols.role]).toEqual(null);
+          });
         });
       });
     });
 
-    context('without a href', () => {
-      it('returns the correct data', () => {
-        const el = appendToBody('<area />');
-        expect(el[symbols.aria]).toIncludeProperties({
-          role: null,
-          implicit: null,
-          allowedRoles: [],
-          allowedAttributes: globalAttributes,
-          implicitAttributes: [],
+    context('without valid image map', () => {
+      context('with a href', () => {
+        it('returns the correct data', () => {
+          const el = appendToBody('<area href="#" />');
+          expect(el[symbols.aria]).toIncludeProperties({
+            role: 'link',
+            implicit: 'link',
+            allowedRoles: [],
+            allowedAttributes: globalAttributes.concat('expanded'),
+            implicitAttributes: [],
+          });
+        });
+
+        ['none', 'presentation'].forEach((role) => {
+          it(`allows ${role}`, () => {
+            const el = appendToBody(`<area href="#" role="${role}"/>`);
+            expect(el[symbols.role]).toEqual(role);
+          });
         });
       });
 
-      ['none', 'presentation'].forEach((role) => {
-        it(`allows ${role}`, () => {
-          const el = appendToBody(`<area role="${role}"/>`);
-          expect(el[symbols.role]).toEqual(role);
+      context('without a href', () => {
+        it('returns the correct data', () => {
+          const el = appendToBody('<area />');
+          expect(el[symbols.aria]).toIncludeProperties({
+            role: null,
+            implicit: null,
+            allowedRoles: [],
+            allowedAttributes: globalAttributes,
+            implicitAttributes: [],
+          });
+        });
+
+        ['none', 'presentation'].forEach((role) => {
+          it(`allows ${role}`, () => {
+            const el = appendToBody(`<area role="${role}"/>`);
+            expect(el[symbols.role]).toEqual(role);
+          });
         });
       });
     });
@@ -1982,6 +2030,70 @@ describe('ariaExtenions#[aria]', () => {
   context('test validation', () => {
     it('has a spec for each element', () => {
       expect(hasSpec).toMatchArray(htmlElements);
+    });
+  });
+
+  describe('#explicit', () => {
+    it('is null if no role is specified', () => {
+      const el = appendToBody('<input />');
+      expect(el[symbols.aria].explicit).toEqual(null);
+    });
+
+    it('is the specified role', () => {
+      const el = appendToBody('<input role="dialog" />');
+      expect(el[symbols.aria].explicit).toEqual('dialog');
+    });
+
+    it('ignores unknown roles', () => {
+      const el = appendToBody('<input role="foo dialog" />');
+      expect(el[symbols.aria].explicit).toEqual('dialog');
+    });
+
+    it('ignores abstract roles', () => {
+      const el = appendToBody('<input role="command dialog" />');
+      expect(el[symbols.aria].explicit).toEqual('dialog');
+    });
+
+    it('does not ignore invalid none', () => {
+      const el = appendToBody('<input role="none" />');
+      expect(el[symbols.aria].explicit).toEqual('none');
+    });
+  });
+
+  describe('#inherited', () => {
+    it('is null if no role is specified', () => {
+      const el = appendToBody('<input />');
+      expect(el[symbols.aria].inherited).toEqual(null);
+    });
+
+    it('is null if there is no role', () => {
+      const el = appendToBody('<div />');
+      expect(el[symbols.aria].inherited).toEqual(null);
+    });
+
+    it('is null if an owned element does not inherit none', () => {
+      const el = appendToBody('<ul><li /></ul>').querySelector('li');
+      expect(el[symbols.aria].inherited).toEqual(null);
+    });
+
+    it('is null if an owned element use of none is invalid', () => {
+      const el = appendToBody('<ul role="none" aria-invalid="true"><li /></ul>').querySelector('li');
+      expect(el[symbols.aria].inherited).toEqual(null);
+    });
+
+    it('is none if an owned element has an owner with none', () => {
+      const el = appendToBody('<ul role="none"><li /></ul>').querySelector('li');
+      expect(el[symbols.aria].inherited).toEqual('none');
+    });
+
+    it('is presentation if an owned element has an owner with presentation', () => {
+      const el = appendToBody('<ul role="presentation"><li /></ul>').querySelector('li');
+      expect(el[symbols.aria].inherited).toEqual('presentation');
+    });
+
+    it('inherits through multiple owned elements', () => {
+      const el = appendToBody('<table role="none"><tr><td /></tr></table>').querySelector('td');
+      expect(el[symbols.aria].inherited).toEqual('none');
     });
   });
 });

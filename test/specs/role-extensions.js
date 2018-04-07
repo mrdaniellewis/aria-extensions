@@ -111,19 +111,41 @@ describe('role-extensions', () => {
         expect(el[symbols.role]).toEqual('dialog');
       });
 
-      it('ignores none when combined with global aria attributes', () => {
-        const el = appendToBody('<article role="none" aria-haspopup="true" />');
-        expect(el[symbols.role]).toEqual('article');
-      });
+      ['none', 'presentation'].forEach((role) => {
+        it(`ignores ${role} when combined with global aria attributes`, () => {
+          const el = appendToBody(`<article role="${role}" aria-haspopup="true" />`);
+          expect(el[symbols.role]).toEqual('article');
+        });
 
-      it('ignores presentation when combined with global aria attributes', () => {
-        const el = appendToBody('<article role="presentation" aria-haspopup="true" />');
-        expect(el[symbols.role]).toEqual('article');
-      });
+        it(`does not ignore ${role} when combined with role aria attributes`, () => {
+          const el = appendToBody(`<article role="${role}" aria-posinset="4" />`);
+          expect(el[symbols.role]).toEqual(role);
+        });
 
-      it('does not ignore none when combined with role aria attributes', () => {
-        const el = appendToBody('<article role="none" aria-posinset="4" />');
-        expect(el[symbols.role]).toEqual('none');
+        it(`does not ignore ${role} when combined with aria-hidden="true"`, () => {
+          const el = appendToBody(`<article role="${role}" aria-hidden="true" />`);
+          expect(el[symbols.role]).toEqual(role);
+        });
+
+        it(`inherits ${role} from an owned element`, () => {
+          const el = appendToBody(`<ul role="${role}"><li /></ul>`).querySelector('li');
+          expect(el[symbols.role]).toEqual(role);
+        });
+
+        it(`does not inherit ${role} from an owned element if it has an explit role`, () => {
+          const el = appendToBody(`<ul role="${role}"><li role="listitem" /></ul>`).querySelector('li');
+          expect(el[symbols.role]).toEqual('listitem');
+        });
+
+        it(`does not inherit ${role} from an owned element if the owned element has a global attribute`, () => {
+          const el = appendToBody(`<ul role="${role}" aria-invalid="true"><li /></ul>`).querySelector('li');
+          expect(el[symbols.role]).toEqual('listitem');
+        });
+
+        it(`does inherit ${role} from an owned element if the owned element is hidden`, () => {
+          const el = appendToBody(`<ul role="${role}" aria-hidden="true"><li /></ul>`).querySelector('li');
+          expect(el[symbols.role]).toEqual(role);
+        });
       });
     });
 

@@ -63,7 +63,9 @@ Returns an object containing a description of the allowed aria roles and propert
 Returned object properties:
 
 - **`role`** - String - The calculated role.  Same as that found on `[symbols.role]`
+- **`explicit`** - String - The role from the role attribute.
 - **`implicitRole`** - String - The implicit role the element will take if there is no `role` attribute.  This depends on the element context.
+- **`inherited`** - String - A role inherited from an owned element.
 - **`allowedRoles`** - Array - The roles allowed in the `role` attribute.
 - **`allowedAttributes`** - Array - The `aria-*` attributes that may be added to the element
 - **`implicitAttributes`** - Array - The `aria-*` attributes that are implicit for this element.
@@ -74,7 +76,9 @@ node[symbols.aria]
 
 // = {
 //     role: 'article',
+//     explicit: null,
 //     implicit: 'article',
+//     inherited: null,
 //     allowedRoles: ['application', 'document', 'feed', 'main', 'none', 'presentation', 'region'],
 //     allowedAttributes: [quite a long list of attibutes],
 //     implicitAttributes: [],
