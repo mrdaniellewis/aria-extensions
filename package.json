@@ -1,6 +1,6 @@
 {
   "name": "aria-extensions",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Extensions to the element prototype chain to calculate aria properties",
   "keywords": [
     "aria"
