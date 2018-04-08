@@ -173,6 +173,18 @@ describe('focusable extensions', () => {
           expect(node[symbols.focusable]).toEqual(false);
         });
       });
+
+      context('<iframe>', () => {
+        it('returns true', () => {
+          const node = appendToBody('<iframe src="about:blank"></iframe>');
+          expect(node[symbols.focusable]).toEqual(true);
+        });
+
+        it('returns false if hidden', () => {
+          const node = appendToBody('<iframe src="about:blank" hidden></iframe>');
+          expect(node[symbols.focusable]).toEqual(false);
+        });
+      });
     });
 
     context('contenteditable elements', () => {
