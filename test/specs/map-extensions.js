@@ -35,4 +35,44 @@ describe('map extensions', () => {
       });
     });
   });
+
+  describe('#[imageMap]', () => {
+    it('return null with no useMap', () => {
+      const node = appendToBody('<img src="flower.jpg" />');
+      expect(node[symbols.imageMap]).toEqual(null);
+    });
+
+    it('return null if useMap has no valid target', () => {
+      const id = uniqueId();
+      const node = appendToBody(`<img src="flower.jpg" usemap="#${id}" />`);
+      expect(node[symbols.imageMap]).toEqual(null);
+    });
+
+    it('return the map with a valid target', () => {
+      const id = uniqueId();
+      const node = appendToBody(`<img src="flower.jpg" usemap="#${id}" />`);
+      const map = appendToBody(`<map name="${id}"><area /></map>`);
+      expect(node[symbols.imageMap]).toEqual(map);
+    });
+
+    it('return the map case insensitively with a valid target', () => {
+      const id = uniqueId();
+      const node = appendToBody(`<img src="flower.jpg" usemap="#${id}x" />`);
+      const map = appendToBody(`<map name="${id}X"><area /></map>`);
+      expect(node[symbols.imageMap]).toEqual(map);
+    });
+
+    describe('caching', () => {
+      it('caches the value', () => {
+        ariaExtensions.startCaching();
+
+        const id = uniqueId();
+        const node = appendToBody(`<img src="flower.jpg" usemap="#${id}" />`);
+        const map = appendToBody(`<map name="${id}"><area /></map>`);
+        expect(node[symbols.imageMap]).toEqual(map);
+        map.name = uniqueId();
+        expect(node[symbols.imageMap]).toEqual(map);
+      });
+    });
+  });
 });

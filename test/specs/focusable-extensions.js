@@ -69,6 +69,18 @@ describe('focusable extensions', () => {
         });
       });
 
+      context('<details>', () => {
+        it('returns true', () => {
+          const node = appendToBody('<details />');
+          expect(node[symbols.focusable]).toEqual(true);
+        });
+
+        it('returns false if hidden', () => {
+          const node = appendToBody('<details hidden />');
+          expect(node[symbols.focusable]).toEqual(false);
+        });
+      });
+
       context('<input>', () => {
         it('returns true', () => {
           const node = appendToBody('<input />');

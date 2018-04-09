@@ -240,8 +240,16 @@ An array of `<img>` elements referencing this `<map>` element.
 
 ```js
 // node = <map name="foo" /><img usemap="#FOO" />
-node[symbols.images] // = [<img usemap="#FOO" />
+node[symbols.images] // = [<img usemap="#FOO" />]
 ```
+
+## `HTMLImageElement.prototype[symbols.imageMap]`
+
+The `<map>` element referenced by the image, if any.
+
+```js
+// node = <img usemap="#FOO" /><map name="foo" />
+node[symbols.imageMap] // = <map name="foo" />
 
 ## `Element.prototype[symbols.role]`
 
