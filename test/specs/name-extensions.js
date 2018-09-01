@@ -58,6 +58,11 @@ describe('name-extensions', () => {
         const node = appendToBody('<div aria-label="foo" aria-labelledby="" />');
         expect(node[symbols.accessibleName]).toEqual('foo');
       });
+
+      it('returns aria-label if aria-laballedby has no valid nodes', () => {
+        const node = appendToBody(`<div aria-label="foo" aria-labelledby="${uniqueId()}" />`);
+        expect(node[symbols.accessibleName]).toEqual('foo');
+      });
     });
 
     describe('native text alternative', () => {
@@ -129,6 +134,11 @@ describe('name-extensions', () => {
 
         it('returns the native text alternative if aria-label is empty', () => {
           const node = appendToBody('<img alt="alt" aria-label="" />');
+          expect(node[symbols.accessibleName]).toEqual('alt');
+        });
+
+        it('returns the native text alternative if aria-label is whitespace', () => {
+          const node = appendToBody('<img alt="alt" aria-label=" " />');
           expect(node[symbols.accessibleName]).toEqual('alt');
         });
       });

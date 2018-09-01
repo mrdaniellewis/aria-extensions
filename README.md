@@ -56,6 +56,15 @@ Calcuates the accessible description for the element according to the [alternati
 node[symbols.accessibleDescription] // = 'Lorem ipsum'
 ```
 
+## `Element.prototype[symbols.activedescendant]`
+
+Returns the element referenced by the `aria-activedescendant` attribute, or null.
+
+```js
+// node = <div aria-activedescendant="foo" />
+node[symbols.activedescendant] // = <div id="foo" />
+```
+
 ## `Element.prototype[symbols.aria]`
 
 Returns an object containing a description of the allowed aria roles and properties on an element.
@@ -176,7 +185,7 @@ Calculate the contract ratio between two colours.  The colours can be any CSS co
 ariaExtensions.contrast('#000', '#aaa') // = 9.04
 ```
 
-## `Element.prototype[symbols.backgroundColour]`
+### `Element.prototype[symbols.backgroundColour]`
 
 Returns calculated background colour, including blending with background, of an element as an array of rgba values.
 As this is a blended colour the "a" value will always be 1.
@@ -184,6 +193,42 @@ As this is a blended colour the "a" value will always be 1.
 ```js
 // node = <div style="color: #000; background-color: #aaa">foo</div>
 node[symbols.contrastRatio] // = [170, 170, 170, 1]
+```
+
+## `Element.prototype[symbols.controls]`
+
+Returns an array of elements referenced by the `aria-controls` attribute.
+
+```js
+// node = <div aria-controls="foo" />
+node[symbols.controls] // = [<div id="foo" />]
+```
+
+## `Element.prototype[symbols.describedby]`
+
+Returns an array of elements referenced by the `aria-describedby` attribute.
+
+```js
+// node = <div aria-describedby="foo" />
+node[symbols.describedby] // = [<div id="foo" />]
+```
+
+## `Element.prototype[symbols.details]`
+
+Returns the element referenced by the `aria-details` attribute, or null.
+
+```js
+// node = <div aria-details="foo" />
+node[symbols.details] // = <div id="foo" />
+```
+
+## `Element.prototype[symbols.errormessage]`
+
+Returns the element referenced by the `aria-errormessage` attribute, or null.
+
+```js
+// node = <div aria-errormessage="foo" />
+node[symbols.errormessage] // = <div id="foo" />
 ```
 
 ## `Element.prototype[symbols.findRole](names, { exact = false })`
@@ -199,6 +244,15 @@ This method is also available on document.
 node[symbols.findRole]('button') // = [<button />]
 node[symbols.findRole](['button', 'link') // = [<button />, <a href="#" />]
 node[symbols.findRole]('command', { exact: true }) // = []
+```
+
+## `Element.prototype[symbols.flowto]`
+
+Returns an array of elements referenced by the `aria-flowto` attribute.
+
+```js
+// node = <div aria-flowto="foo" />
+node[symbols.flowto] // = [<div id="foo" />]
 ```
 
 ## `Element.prototype[symbols.focusable]`
@@ -250,6 +304,16 @@ The `<map>` element referenced by the image, if any.
 ```js
 // node = <img usemap="#FOO" /><map name="foo" />
 node[symbols.imageMap] // = <map name="foo" />
+```
+
+## `Element.prototype[symbols.labelledby]`
+
+Returns an array of elements referenced by the `aria-labelledby` attribute.
+
+```js
+// node = <div aria-labelledby="foo" />
+node[symbols.labelledby] // = [<div id="foo" />]
+```
 
 ## `Element.prototype[symbols.role]`
 
@@ -258,6 +322,15 @@ Calculates the elements role.  This is either the provided role or the implicit 
 ```js
 // node = <div role="foo feed" />
 node[symbols.role] // = 'feed'
+```
+
+## `Element.prototype[symbols.owns]`
+
+Returns an array of elements referenced by the `aria-owns` attribute.
+
+```js
+// node = <div aria-owns="foo" />
+node[symbols.owns] // = [<div id="foo" />]
 ```
 
 ## `Element.prototype[symbols.style](name, pseudo)`
