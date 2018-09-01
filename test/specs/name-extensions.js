@@ -315,6 +315,27 @@ describe('name-extensions', () => {
         expect(node[symbols.accessibleName]).toEqual('foo bar fee foobarfee foobar fee foo barfee');
       });
 
+      it('adds a space around input elements where the value is displayed', () => {
+        const node = appendToBody(`<div role="button">
+          foo<input type="text" value="bar" />fee
+        </div>`);
+        expect(node[symbols.accessibleName]).toEqual('foo bar fee');
+      });
+
+      it('adds a space around image elements', () => {
+        const node = appendToBody(`<div role="button">
+          foo<img alt="bar" />fee
+        </div>`);
+        expect(node[symbols.accessibleName]).toEqual('foo bar fee');
+      });
+
+      it('adds a space around tooltips', () => {
+        const node = appendToBody(`<div role="button">
+          foo<span title="bar" />fee
+        </div>`);
+        expect(node[symbols.accessibleName]).toEqual('foo bar fee');
+      });
+
       it('does not create infinite loops', () => {
         const id = uniqueId();
         const node = appendToBody(`<div role="button"><div id="${id}">foo<span aria-labelledby="${id}">bar</span></div></div>`);
